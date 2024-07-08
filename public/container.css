@@ -1,0 +1,7 @@
+.container--action{
+    display: flex;
+    justify-content: space-between;
+}
+.title--app{
+    text-align: center;
+}
