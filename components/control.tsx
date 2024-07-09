@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import CopyBoard from './copyboard';
 import "../public/control.css"
+import { Toaster, toast } from 'sonner'
+
 export default function Control({ handlerJustifyContent, handlerAlignItems,
     setPaddingLR, setPaddingTB, setBorderRadius, handlerChangeElement, element, setFontSize, setBackgroundColor, setFontColor, fontColor, backgroundColor, setPlaceholderColor, placeholderColor, setBorderColor, borderColor, setBorderSize }) {
 
@@ -51,7 +53,8 @@ export default function Control({ handlerJustifyContent, handlerAlignItems,
         document.body.appendChild(textField)
         textField.select()
         document.execCommand('copy')
-        textField.remove()
+        textField.remove();
+        toast.success("El color se ha copiado exitosamente.")
     }
 
     return (
@@ -59,6 +62,7 @@ export default function Control({ handlerJustifyContent, handlerAlignItems,
             display: "flex",
             flexDirection: "column"
         }}>
+            <Toaster position="top-right" />
             <div>
                 <label>Select your element</label><br />
                 <select onChange={(e) => handlerChangeElement(e.target.value)}>
@@ -182,7 +186,7 @@ export default function Control({ handlerJustifyContent, handlerAlignItems,
                             <div className='withCopyboard'>
                                 <input type="color" value={backgroundColor} onChange={(e) => {
                                     setBackgroundColor(e.target.value);
-                                }} /> px
+                                }} />
                                 <CopyBoard handlerClick={() => {
                                     copyToClipboard(backgroundColor);
                                 }} />
@@ -208,7 +212,7 @@ export default function Control({ handlerJustifyContent, handlerAlignItems,
                             <div className='withCopyboard'>
                                 <input type="color" value={borderColor} onChange={(e) => {
                                     setBorderColor(e.target.value);
-                                }} /> px
+                                }} />
                                 <CopyBoard handlerClick={() => {
                                     copyToClipboard(fontColor);
                                 }} />
@@ -220,7 +224,7 @@ export default function Control({ handlerJustifyContent, handlerAlignItems,
                             <div className='withCopyboard'>
                                 <input type="color" value={fontColor} onChange={(e) => {
                                     setFontColor(e.target.value);
-                                }} /> px
+                                }} />
                                 <CopyBoard handlerClick={() => {
                                     copyToClipboard(fontColor);
                                 }} />
@@ -237,7 +241,7 @@ export default function Control({ handlerJustifyContent, handlerAlignItems,
                             <div className='withCopyboard'>
                                 <input type="color" value={placeholderColor} onChange={(e) => {
                                     setPlaceholderColor(e.target.value);
-                                }} /> px
+                                }} />
                                 <CopyBoard handlerClick={() => {
                                     copyToClipboard(fontColor);
                                 }} />

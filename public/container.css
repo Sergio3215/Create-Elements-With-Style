@@ -10,3 +10,8 @@
     position: relative;
     bottom: 0px;
 }
+
+.title--app{
+    font-size: 350%;
+    padding: 20px;
+}

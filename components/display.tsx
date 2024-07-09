@@ -79,10 +79,7 @@ export default function Display({ element, containerStyle, elementSyle, placehol
                 </style>
                 ${htmlElement}
                 `
-            } style={{
-                height: "95vh",
-                width: "80vw",
-            }}>
+            }>
 
             </iframe>
         </>

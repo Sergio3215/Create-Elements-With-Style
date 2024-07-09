@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import "../public/container.css"
 import "../public/display.css"
 import Swal from 'sweetalert2'
+import { Toaster, toast } from 'sonner'
 
 export default function Container() {
 
@@ -48,8 +49,19 @@ export default function Container() {
 
     const getCodeElement = async () => {
         console.log(todoElemento);
+
+        const copyToClipboard = (value) => {
+            let textField = document.createElement('textarea')
+            textField.innerText = value
+            document.body.appendChild(textField)
+            textField.select()
+            document.execCommand('copy')
+            textField.remove();
+            toast.success("Código copiado exitosamente")
+        }
+
         await Swal.fire({
-            icon: "success",
+            // icon: "success",
             // input: "textarea",
             // inputLabel: "Code Element",
             // inputPlaceholder: "Type your message here...",
@@ -58,11 +70,38 @@ export default function Container() {
             //     "readonly": "true"
             // },
             html: `
+            <h2>Code Element</h2>
+            <label>HTML</label>
             <div style="display:flex">
                 <div>
-                    <textarea style="height: 20vh; width: 20vw;">${todoElemento}</textarea>
+                    <textarea style="height: 20vh; width: 20vw;" readonly>${todoElemento.split("<!-- html -->")[1]}</textarea>
                 </div>
-                <div style="cursor: pointer;" id="popup--copyboard">
+                <div style="cursor: pointer;" id="popup--html" name="html">
+                <?xml version="1.0" encoding="UTF-8"?>
+                    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.58 59.88" style="width:50px;height:50px">
+                      <defs>
+                        <style>
+                          .cls-1 {
+                            fill: #fff;
+                            stroke: #231f20;
+                            stroke-miterlimit: 10;
+                            stroke-width: 2px;
+                          }
+                        </style>
+                      </defs>
+                      <g id="Layer_1-2" data-name="Layer 1">
+                        <rect class="cls-1" x=".5" y="2.01" width="20.89" height="24.78" rx="3.1" ry="3.1"/>
+                        <rect class="cls-1" x="5.14" y=".5" width="22.94" height="28.88" rx="3.1" ry="3.1"/>
+                      </g>
+                    </svg>
+                </div>
+            </div>
+            <label>CSS</label>
+            <div style="display:flex">
+                <div>
+                    <textarea style="height: 20vh; width: 20vw;" readonly>${todoElemento.split("<!-- html -->")[0].split("/*CSS*/")[1]}</textarea>
+                </div>
+                <div style="cursor: pointer;" id="popup--css">
                 <?xml version="1.0" encoding="UTF-8"?>
                     <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.58 59.88" style="width:50px;height:50px">
                       <defs>
@@ -83,19 +122,16 @@ export default function Container() {
                 </div>
             </div>
             `,
-            showCloseButton: true
+            showCloseButton: true,
+            didOpen:()=>{
+                document.getElementById("popup--html").addEventListener("click",(e)=>{
+                    copyToClipboard(todoElemento.split("<!-- html -->")[1]);
+                });
+                document.getElementById("popup--css").addEventListener("click",(e)=>{
+                    copyToClipboard(todoElemento.split("<!-- html -->")[0].split("/*CSS*/")[1]);
+                });
+            }
         });
-
-    }
-
-    
-    const copyToClipboard = () => {
-        var textField = document.createElement('textarea')
-        textField.innerText = todoElemento
-        document.body.appendChild(textField)
-        textField.select()
-        document.execCommand('copy')
-        textField.remove()
     }
 
 
@@ -158,6 +194,7 @@ export default function Container() {
 
     return (
         <div id="container--general">
+            <Toaster position="top-right" />
             <div className="title--app">
                 Create Component Syles
             </div>
