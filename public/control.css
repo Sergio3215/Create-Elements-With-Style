@@ -1,0 +1,10 @@
+.withCopyboard {
+    display: flex;
+}
+
+hr {
+    border: 0px solid transparent;
+    border-bottom: 1.5px solid #bababa;
+    height: 12px;
+    width: 100%;
+}

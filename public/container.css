@@ -5,3 +5,8 @@
 .title--app{
     text-align: center;
 }
+
+#generate--code{
+    position: relative;
+    bottom: 0px;
+}
